@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 import {
   TODO_ACTIONS,
   todoReducer,
@@ -18,7 +18,6 @@ export const useTodoContext = () => {
 export const TodoProvider = ({ children }) => {
   const [state, dispatch] = useReducer(todoReducer, todoInitialState);
 
-  // Action creators avec mise à jour optimiste
   const actions = {
     addTodo: (text) => {
       dispatch({
@@ -32,10 +31,63 @@ export const TodoProvider = ({ children }) => {
       });
     },
 
-    // TODO: Ajoutez les autres méthodes pour les actions définies dans le reducer
+    updateTodo: (id, newText) => {
+      dispatch({
+        type: TODO_ACTIONS.UPDATE,
+        payload: { id, text: newText },
+      });
+    },
+
+    deleteTodo: (id) => {
+      dispatch({
+        type: TODO_ACTIONS.DELETE,
+        payload: id,
+      });
+    },
+
+    toggleTodo: (id) => {
+      dispatch({
+        type: TODO_ACTIONS.TOGGLE,
+        payload: id,
+      });
+    },
+
+    startEdit: (id) => {
+      dispatch({
+        type: TODO_ACTIONS.START_EDIT,
+        payload: id,
+      });
+    },
+
+    cancelEdit: (id) => {
+      dispatch({
+        type: TODO_ACTIONS.CANCEL_EDIT,
+        payload: id,
+      });
+    },
+
+    setFilter: (filter) => {
+      dispatch({
+        type: TODO_ACTIONS.SET_FILTER,
+        payload: filter,
+      });
+    },
+
+    setLoading: (isLoading) => {
+      dispatch({
+        type: TODO_ACTIONS.SET_LOADING,
+        payload: isLoading,
+      });
+    },
+
+    setError: (errorMessage) => {
+      dispatch({
+        type: TODO_ACTIONS.SET_ERROR,
+        payload: errorMessage,
+      });
+    },
   };
 
-  // Sélecteurs (computed values)
   const selectors = {
     getTodos: () => {
       switch (state.filter) {
@@ -47,6 +99,10 @@ export const TodoProvider = ({ children }) => {
           return state.todos;
       }
     },
+    getRemainingCount: () =>
+      state.todos.filter((todo) => !todo.completed).length,
+    getCompletedCount: () =>
+      state.todos.filter((todo) => todo.completed).length,
   };
 
   const value = {
