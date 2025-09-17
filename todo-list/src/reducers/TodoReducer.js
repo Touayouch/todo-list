@@ -81,7 +81,7 @@ export const todoReducer = (state, action) => {
     case TODO_ACTIONS.SET_FILTER:
       return {
         ...state,
-        filter: action.payload, // "all", "active", "completed"
+        filter: action.payload, 
       };
 
     case TODO_ACTIONS.SET_LOADING:
