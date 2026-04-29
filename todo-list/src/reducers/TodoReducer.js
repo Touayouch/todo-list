@@ -1,5 +1,5 @@
 export const TODO_ACTIONS = {
-  ADD: "ADD",
+  ADD: "ADD"
   UPDATE: "UPDATE",
   DELETE: "DELETE",
   TOGGLE: "TOGGLE",
