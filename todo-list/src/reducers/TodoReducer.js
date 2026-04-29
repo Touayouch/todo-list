@@ -1,4 +1,4 @@
-export const TODO_ACTIONS = {
+export const TODO_ACTIONS = 
   ADD: "ADD",
   UPDATE: "UPDATE",
   DELETE: "DELETE",
