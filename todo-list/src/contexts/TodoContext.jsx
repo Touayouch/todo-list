@@ -5,7 +5,6 @@ import {
   initialState as todoInitialState,
 } from "../reducers/TodoReducer";
 
-const TodoContext = createContext();
 
 export const useTodoContext = () => {
   const context = useContext(TodoContext);
