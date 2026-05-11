@@ -29,7 +29,7 @@ export const TodoProvider = ({ children }) => {
           completed: false,
         },
       });
-    }
+    },
 
     updateTodo: (id, newText) => {
       dispatch({
